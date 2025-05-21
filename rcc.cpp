@@ -50,7 +50,7 @@ struct rcc_cpu {
         switch (op)
         {
             case NOP:   break;
-            case NAND:  x=!(x&y);   break;
+            case NAND:  x = ~(x&y);   break;
             case SWAP: {u8 z=x;x=y;y=z;} break;
             case SYSCALL:   break; // DOESN'T DO ANYTHING YET
 
