@@ -1,6 +1,4 @@
-nop
-add
-sub
-inc
-dec
-nand
+ld 0 y
+ld [:z] x
+:z
+0

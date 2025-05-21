@@ -41,7 +41,7 @@ RCC_OP get_op(std::vector<std::string>& t) {
     if(t[0]=="ld") {
         if(t[2]=="y")   return LDn8Y;
         if(t[1]=="x")   return LDXn16p;
-        if(t[1][0]=='[')   return LDn16pX;
+        if(t[1][0]=='[' && t[1][t[1].length()-1]==']')   return LDn16pX;
         return LDn8X;
     }
 
