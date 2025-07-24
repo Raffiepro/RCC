@@ -60,8 +60,9 @@ void arg_interp16(std::ofstream& to, std::string& arg) {
         else arg16 = std::stoi(arg,0,10);
     }
     
-    to.put(arg16&0xFF);
-    to.put((arg16>>8)&0xFF);
+    //to.put(arg16&0xFF);
+    //to.put((arg16>>8)&0xFF);
+    to.write((char*)&arg16, 2);
 }
 
 void assemble(std::ifstream& f, std::ofstream& to) {
@@ -98,10 +99,10 @@ void assemble(std::ifstream& f, std::ofstream& to) {
             case LDn8X: arg_interp(to, t[1]); break;
             case LDn8Y: arg_interp(to, t[1]); break;
             case LDn16pX:   arg_interp16(to, t[1]); break;
-            case LDXn16p:   arg_interp16(to, t[1]); break;
+            case LDXn16p:   arg_interp16(to, t[2]); break;
 
             case JMPn16:      arg_interp16(to, t[1]); break;
-            case JMPXZn16:    arg_interp16(to, t[1]); break;
+            case JMPXZn16:    arg_interp16(to, t[2]); break;
             case JMPn16pZXY:  arg_interp16(to, t[1]); break;
         }
 

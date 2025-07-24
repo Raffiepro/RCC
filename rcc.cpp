@@ -19,7 +19,7 @@ struct rcc_cpu {
 
     void execute() {
         u8& op = mem[pc];
-        u16 n16 = (((u16)mem[pc+1])<<8) | (u16)mem[pc+2];
+        u16 n16 = *((u16*)&mem[pc+1]);
         u16 xy = (((u16)x)<<8) | (u16)y;
 
         bool jumped=false;
@@ -32,7 +32,7 @@ struct rcc_cpu {
 
             case LDn8X: x = mem[pc+1];  break;
             case LDn8Y: y = mem[pc+1];  break;
-            case LDn16pX:   x = mem[n16];  break;
+            case LDn16pX:   x = mem[n16]; break;
             case LDXn16p:   mem[n16] = x;  break;
 
             case ADD:   x+=y;   break;
@@ -57,7 +57,7 @@ struct rcc_cpu {
 
 int main() {
     rcc_cpu cpu;
-    cpu.readMem("prg.rcc");
+    cpu.readMem("compiled.sl");
     while(true) {
         cpu.execute();
         cpu.info();
